@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo 'Styling, testing and building your project before committing'
+
+# Check Prettier standards
+pnpm check-format ||
+(
+    echo 'Prettier Check Failed.
+          Run pnpm run format, add changes and try commit again.';
+    false;
+)
+
+# Check ESLint Standards
+pnpm lint ||
+(
+    echo 'ESLint Check Failed. 
+          Make the required changes listed above, add changes and try to commit again.'
+    false; 
+)
+
+# If everything passes... Now we can commit
+echo 'Alright.... Code looks good... Trying to build now.'
+
+pnpm build ||
+(
+    echo 'React build failed.
+          View the errors above to see why.'
+    false;
+)
+
+# If everything passes... Now we can commit
+echo 'Everything is fine. Commiting Now.
+.
+.
+.
+.
+'
