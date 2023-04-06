@@ -24,7 +24,7 @@ export type UserPrivilegesType = Array<number | string>
 export type PrivIdType = `#${string}`
 
 export interface IUseCheckerMaker {
-  userPrivileges: UserPrivilegesType
+  userPrivileges: KeyType
   routes: RoutesWithPrivileges
   elementPrivileges?: ElementPrivilegeType
 }

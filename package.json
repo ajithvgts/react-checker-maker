@@ -1,7 +1,10 @@
 {
   "name": "react-checker-maker",
-  "version": "0.0.1-alpha.01",
+  "version": "0.0.1-alpha.02",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

@@ -2,20 +2,47 @@ import {
   ElementPrivilegeType,
   KeyType,
   RoutesWithPrivileges,
-  UserPrivilegesType,
 } from '../contracts'
 
 const checkArrayPrivilege = (
   key: Array<string | number>,
-  userPrivileges: UserPrivilegesType
-): boolean => key.some((s) => userPrivileges.includes(String(s)))
-
-const hasPrivilege = (
-  key: KeyType,
-  userPrivileges: UserPrivilegesType
+  userPrivileges: KeyType
 ): boolean => {
-  if (typeof key === 'number' || typeof key === 'string') {
+  if (
+    typeof userPrivileges === 'number' ||
+    typeof userPrivileges === 'string'
+  ) {
+    return String(userPrivileges) === String(key)
+  }
+
+  if (Array.isArray(userPrivileges)) {
+    return key.some((s) => userPrivileges.includes(String(s)))
+  }
+
+  return true
+}
+
+const checkStringPrivilege = (
+  key: string | number,
+  userPrivileges: KeyType
+): boolean => {
+  if (
+    typeof userPrivileges === 'number' ||
+    typeof userPrivileges === 'string'
+  ) {
+    return String(userPrivileges) === String(key)
+  }
+
+  if (Array.isArray(userPrivileges)) {
     return userPrivileges.includes(String(key))
+  }
+
+  return true
+}
+
+const hasPrivilege = (key: KeyType, userPrivileges: KeyType): boolean => {
+  if (typeof key === 'number' || typeof key === 'string') {
+    return checkStringPrivilege(key, userPrivileges)
   }
 
   if (Array.isArray(key)) {
@@ -29,30 +56,30 @@ const removeEL = (el: HTMLElement) => {
   el.remove()
 }
 
-export const filterRoutes = (
+export function filterRoutes(
   routes: RoutesWithPrivileges,
-  userPrivileges: UserPrivilegesType
-): RoutesWithPrivileges =>
-  routes.filter((f) => {
-    if (!f.privileges) {
-      return true
-    }
-
-    const privileges = [f.privileges].flat()
-    if (!privileges.length) {
-      return true
-    }
-
-    if (checkArrayPrivilege(privileges, userPrivileges)) {
+  userPrivileges: KeyType
+) {
+  return routes.filter((f) => {
+    const privileges = [f?.privileges || ''].flat()
+    if (
+      !f.privileges ||
+      !privileges.length ||
+      checkArrayPrivilege(privileges, userPrivileges)
+    ) {
+      if (f.children) {
+        f.children = filterRoutes(f.children, userPrivileges)
+      }
       return true
     }
 
     return false
   })
+}
 
 export const renderElementPrivilege = (
   elementPrivileges: ElementPrivilegeType,
-  userPrivileges: UserPrivilegesType
+  userPrivileges: KeyType
 ) => {
   document
     .querySelectorAll<HTMLElement>('[data-priv-id]')

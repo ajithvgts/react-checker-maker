@@ -19,19 +19,27 @@ const useCheckerMaker: Type = ({
     [orgRoutes, fRoutes]
   )
 
-  const userPrivileges = useMemo(
-    () => orgUserPrivileges.map((s) => String(s)),
-    [orgUserPrivileges]
-  )
+  const userPrivileges = useMemo(() => {
+    if (
+      typeof orgUserPrivileges === 'number' ||
+      typeof orgUserPrivileges === 'string'
+    ) {
+      return String(orgUserPrivileges)
+    }
+
+    if (Array.isArray(orgUserPrivileges)) {
+      return orgUserPrivileges.map((s) => String(s))
+    }
+  }, [orgUserPrivileges])
 
   useEffect(() => {
     if (elementPrivileges) {
-      renderElementPrivilege(elementPrivileges, userPrivileges)
+      renderElementPrivilege(elementPrivileges, userPrivileges || '')
     }
   }, [pathname])
 
   useEffect(() => {
-    setFRoutes(filterRoutes(orgRoutes, userPrivileges))
+    setFRoutes(filterRoutes(orgRoutes, userPrivileges || ''))
   }, [])
 
   return routes
