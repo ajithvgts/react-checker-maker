@@ -54,36 +54,36 @@ export const renderElementPrivilege = (
   elementPrivileges: ElementPrivilegeType,
   userPrivileges: UserPrivilegesType
 ) => {
-  document.querySelectorAll<HTMLElement>('[data-priv-id]').forEach((el) => {
-    const privId: any = el.getAttribute('data-priv-id')
-    const privilege: any = elementPrivileges?.[privId]
+  document
+    .querySelectorAll<HTMLElement>('[data-priv-id]')
+    .forEach((el: any) => {
+      const privId: any = el.getAttribute('data-priv-id')
+      const privilege: any = elementPrivileges?.[privId]
 
-    if (typeof privilege === 'string' || typeof privilege === 'number') {
-      if (!hasPrivilege(privilege, userPrivileges)) {
-        removeEL(el)
-      }
-    }
-
-    if (typeof privilege === 'object') {
-      if (!hasPrivilege(privilege.key, userPrivileges)) {
-        if (privilege.removeEL !== false) {
+      if (typeof privilege === 'string' || typeof privilege === 'number') {
+        if (!hasPrivilege(privilege, userPrivileges)) {
           removeEL(el)
         }
+      }
 
-        if (privilege.css) {
-          for (let css in privilege.css) {
-            //@ts-ignore
-            el!.style[css] = privilege.css[css]
+      if (typeof privilege === 'object') {
+        if (!hasPrivilege(privilege.key, userPrivileges)) {
+          if (privilege.removeEL !== false) {
+            removeEL(el)
           }
-        }
 
-        if (privilege.elementProps) {
-          for (let prop in privilege.elementProps) {
-            //@ts-ignore
-            el[prop] = privilege.elementProps[prop]
+          if (privilege.css) {
+            for (const css in privilege.css) {
+              el.style[css] = privilege.css[css]
+            }
+          }
+
+          if (privilege.elementProps) {
+            for (const prop in privilege.elementProps) {
+              el[prop] = privilege.elementProps[prop]
+            }
           }
         }
       }
-    }
-  })
+    })
 }
