@@ -115,5 +115,5 @@ Existing routes list with added **privileges** of type string | number | Array<s
 
 This repository containing the following packages:
 
-- [`react`](/packages/react)
-- [`react-router-dom`](/packages/react-router-dom)
+- [`react`](/package/react)
+- [`react-router-dom`](/package/react-router-dom)
