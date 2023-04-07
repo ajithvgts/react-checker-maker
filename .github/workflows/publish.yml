@@ -17,7 +17,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies and build 🔧
-        run: pnpm install --save --legacy-peer-deps && npm run build
+        run: npm install && npm run build
 
       - name: Publish package on NPM 📦
         run: npm publish
