@@ -1,6 +1,6 @@
 {
   "name": "react-checker-maker",
-  "version": "0.0.1-alpha.10",
+  "version": "0.0.1-alpha.12",
   "type": "module",
   "main": "./dist/root/index.cjs.js",
   "module": "./dist/root/index.es.js",
@@ -54,42 +54,12 @@
         "default": "./dist/index.es.js"
       },
       "require": "./dist/index.cjs.js"
-    },
-    "./components": {
-      "import": {
-        "types": "./dist/components/index.d.ts",
-        "default": "./dist/components/index.es.js"
-      },
-      "require": "./dist/components/index.cjs.js"
-    },
-    "./contracts": {
-      "import": {
-        "types": "./dist/contracts/index.d.ts",
-        "default": "./dist/contracts/index.es.js"
-      },
-      "require": "./dist/contracts/index.cjs.js"
-    },
-    "./hooks": {
-      "import": {
-        "types": "./dist/hooks/index.d.ts",
-        "default": "./dist/hooks/index.es.js"
-      },
-      "require": "./dist/hooks/index.cjs.js"
     }
   },
   "typesVersions": {
     "*": {
       ".": [
         "./dist/index.d.ts"
-      ],
-      "components": [
-        "./dist/components/index.d.ts"
-      ],
-      "contracts": [
-        "./dist/contracts/index.d.ts"
-      ],
-      "hooks": [
-        "./dist/hooks/index.d.ts"
       ]
     }
   }

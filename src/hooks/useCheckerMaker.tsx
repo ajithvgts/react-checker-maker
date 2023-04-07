@@ -2,16 +2,17 @@ import { useEffect, useMemo, useState } from 'react'
 import { RouteObject } from 'react-router-dom'
 import { IUseCheckerMaker, RoutesWithPrivileges } from '../contracts'
 import { filterRoutes, renderElementPrivilege } from '../utils'
+import { usePrivileges } from '../context/Privilege.context'
 
 type Type = (data: IUseCheckerMaker) => RouteObject[]
 
 const useCheckerMaker: Type = ({
   routes: orgRoutes,
   userPrivileges: orgUserPrivileges,
-  pathname,
   elementPrivileges,
 }) => {
   const [fRoutes, setFRoutes] = useState<RoutesWithPrivileges>([])
+  const { setStore, pathname } = usePrivileges()
 
   const routes = useMemo(
     () => (fRoutes.length ? fRoutes : orgRoutes),
@@ -39,6 +40,12 @@ const useCheckerMaker: Type = ({
 
   useEffect(() => {
     setFRoutes(filterRoutes(orgRoutes, userPrivileges || ''))
+
+    setStore({
+      routes: orgRoutes,
+      userPrivileges: orgUserPrivileges,
+      elementPrivileges,
+    })
   }, [])
 
   return routes

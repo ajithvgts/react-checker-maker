@@ -26,6 +26,5 @@ export type PrivIdType = `#${string}`
 export interface IUseCheckerMaker {
   userPrivileges: KeyType
   routes: RoutesWithPrivileges
-  pathname: string
   elementPrivileges?: ElementPrivilegeType
 }
