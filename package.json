@@ -1,7 +1,15 @@
 {
   "name": "react-checker-maker",
-  "version": "0.0.1-alpha.12",
+  "version": "0.0.1-alpha.15",
   "type": "module",
+  "keywords": [
+    "react",
+    "checker-maker",
+    "privileges",
+    "user-permission",
+    "react-checker-maker",
+    "react-router-dom"
+  ],
   "main": "./dist/root/index.cjs.js",
   "module": "./dist/root/index.es.js",
   "types": "./dist/index.d.ts",

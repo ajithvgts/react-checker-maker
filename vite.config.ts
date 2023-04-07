@@ -1,23 +1,23 @@
 import { UserConfigExport, defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { resolve } from 'path'
-import { readFile } from 'node:fs/promises'
-import path from 'node:path'
+// import { readFile } from 'node:fs/promises'
+// import path from 'node:path'
 import dts from 'vite-plugin-dts'
 
 const App = async (): Promise<UserConfigExport> => {
-  let name = 'replaceme'
+  // let name = 'replaceme'
 
-  const data: string = await readFile(path.join(__dirname, 'src', 'index.ts'), {
-    encoding: 'utf-8',
-  })
+  // const data: string = await readFile(path.join(__dirname, 'src', 'index.ts'), {
+  //   encoding: 'utf-8',
+  // })
 
-  const s = data.split('\n')
+  // const s = data.split('\n')
 
-  for (const x of s.reverse())
-    if (x.includes('export default')) {
-      name = x.replace('export default ', '').replace(' ', '')
-    }
+  // for (const x of s.reverse())
+  //   if (x.includes('export default')) {
+  //     name = x.replace('export default ', '').replace(' ', '')
+  //   }
 
   return defineConfig({
     build: {

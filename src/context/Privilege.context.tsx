@@ -13,14 +13,14 @@ import { renderElementPrivilege } from '../utils'
 const initialValue = {
   pathname: '',
   store: {},
-  setStore: ({}) => ({}),
+  setStore: () => '',
   reRenderELPrivilege: () => '',
 }
 
 type PrivilegeContextType = {
   pathname: string
   store: Partial<IUseCheckerMaker>
-  setStore: Dispatch<SetStateAction<{}>>
+  setStore: Dispatch<SetStateAction<Record<any, any>>>
   reRenderELPrivilege: () => void
 }
 
@@ -36,7 +36,6 @@ const PrivilegeProvider: FC<PropsWithChildren & { pathname: string }> = ({
   const [store, setStore] = useState<Partial<IUseCheckerMaker>>({})
 
   const reRenderELPrivilege = () => {
-    console.log(store)
     renderElementPrivilege(
       store.elementPrivileges || {},
       store.userPrivileges || ''
