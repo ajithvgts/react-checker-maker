@@ -15,3 +15,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies and build 🔧
+        run: pnpm install --save --legacy-peer-deps && npm run build
+
+      - name: Publish package on NPM 📦
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

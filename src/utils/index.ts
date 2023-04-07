@@ -87,7 +87,11 @@ export const renderElementPrivilege = (
       const privId: any = el.getAttribute('data-priv-id')
       const privilege: any = elementPrivileges?.[privId]
 
-      if (typeof privilege === 'string' || typeof privilege === 'number') {
+      if (
+        typeof privilege === 'string' ||
+        typeof privilege === 'number' ||
+        Array.isArray(privilege)
+      ) {
         if (!hasPrivilege(privilege, userPrivileges)) {
           removeEL(el)
         }
