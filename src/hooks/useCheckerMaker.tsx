@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { RouteObject } from 'react-router-dom'
-import { IUseCheckerMaker, RoutesWithPrivileges } from '../contracts'
+import { IUseCheckerMaker } from '../contracts'
 import { filterRoutes, renderElementPrivilege } from '../utils'
 import { usePrivileges } from '../context/Privilege.context'
 
