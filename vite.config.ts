@@ -24,7 +24,7 @@ const App = async (): Promise<UserConfigExport> => {
       lib: {
         entry: resolve(__dirname, 'src/index.ts'),
         name: 'react-checker-maker',
-        formats: ['es', 'cjs'],
+        formats: ['es'],
         fileName: (format) => `index.${format}.js`,
       },
       // lib: {

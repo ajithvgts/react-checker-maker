@@ -7,14 +7,17 @@ import React, {
   useContext,
   useState,
 } from 'react'
-import { IUseCheckerMaker } from '../contracts'
-import { renderElementPrivilege } from '../utils'
+import { IUseCheckerMaker, RoutesWithPrivileges } from '../contracts'
+import { filterRoutes, renderElementPrivilege } from '../utils'
 
 const initialValue = {
   pathname: '',
   store: {},
   setStore: () => '',
   reRenderELPrivilege: () => '',
+  fRoutes: [],
+  setFRoutes: () => '',
+  reFilterRoutes: () => '',
 }
 
 type PrivilegeContextType = {
@@ -22,6 +25,9 @@ type PrivilegeContextType = {
   store: Partial<IUseCheckerMaker>
   setStore: Dispatch<SetStateAction<Record<any, any>>>
   reRenderELPrivilege: () => void
+  fRoutes: RoutesWithPrivileges
+  setFRoutes: React.Dispatch<React.SetStateAction<RoutesWithPrivileges>>
+  reFilterRoutes: () => void
 }
 
 const PrivilegeContext = createContext<PrivilegeContextType>(initialValue)
@@ -34,6 +40,7 @@ const PrivilegeProvider: FC<PropsWithChildren & { pathname: string }> = ({
   pathname,
 }) => {
   const [store, setStore] = useState<Partial<IUseCheckerMaker>>({})
+  const [fRoutes, setFRoutes] = useState<RoutesWithPrivileges>([])
 
   const reRenderELPrivilege = () => {
     renderElementPrivilege(
@@ -42,9 +49,21 @@ const PrivilegeProvider: FC<PropsWithChildren & { pathname: string }> = ({
     )
   }
 
+  const reFilterRoutes = () => {
+    setFRoutes(filterRoutes(store.routes || [], store.userPrivileges || ''))
+  }
+
   return (
     <PrivilegeContext.Provider
-      value={{ pathname, store, setStore, reRenderELPrivilege }}
+      value={{
+        pathname,
+        store,
+        setStore,
+        reRenderELPrivilege,
+        fRoutes,
+        setFRoutes,
+        reFilterRoutes,
+      }}
     >
       {children}
     </PrivilegeContext.Provider>

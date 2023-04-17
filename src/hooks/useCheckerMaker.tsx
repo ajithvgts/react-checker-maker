@@ -11,8 +11,7 @@ const useCheckerMaker: Type = ({
   userPrivileges: orgUserPrivileges,
   elementPrivileges,
 }) => {
-  const [fRoutes, setFRoutes] = useState<RoutesWithPrivileges>([])
-  const { setStore, pathname } = usePrivileges()
+  const { setStore, pathname, fRoutes, setFRoutes } = usePrivileges()
 
   const routes = useMemo(
     () => (fRoutes.length ? fRoutes : orgRoutes),
@@ -43,10 +42,10 @@ const useCheckerMaker: Type = ({
 
     setStore({
       routes: orgRoutes,
-      userPrivileges: orgUserPrivileges,
+      userPrivileges: userPrivileges,
       elementPrivileges,
     })
-  }, [])
+  }, [orgUserPrivileges])
 
   return routes
 }
