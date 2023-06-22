@@ -27,7 +27,7 @@ type PrivilegeContextType = {
   reRenderELPrivilege: () => void
   fRoutes: RoutesWithPrivileges
   setFRoutes: React.Dispatch<React.SetStateAction<RoutesWithPrivileges>>
-  reFilterRoutes: () => void
+  reFilterRoutes: (routes: RoutesWithPrivileges) => void
 }
 
 const PrivilegeContext = createContext<PrivilegeContextType>(initialValue)
@@ -49,8 +49,8 @@ const PrivilegeProvider: FC<PropsWithChildren & { pathname: string }> = ({
     )
   }
 
-  const reFilterRoutes = () => {
-    setFRoutes(filterRoutes(store.routes || [], store.userPrivileges || ''))
+  const reFilterRoutes = (routes: RoutesWithPrivileges) => {
+    setFRoutes(filterRoutes(routes || [], store.userPrivileges || ''))
   }
 
   return (

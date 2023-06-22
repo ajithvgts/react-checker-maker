@@ -7,3 +7,6 @@ export * from './hooks'
 
 // Contracts
 export * from './contracts'
+
+// Components
+export * from './components'

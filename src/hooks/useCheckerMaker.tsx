@@ -10,6 +10,7 @@ const useCheckerMaker: Type = ({
   routes: orgRoutes,
   userPrivileges: orgUserPrivileges,
   elementPrivileges,
+  dependencies = [],
 }) => {
   const { setStore, pathname, fRoutes, setFRoutes } = usePrivileges()
 
@@ -35,7 +36,7 @@ const useCheckerMaker: Type = ({
     if (elementPrivileges) {
       renderElementPrivilege(elementPrivileges, userPrivileges || '')
     }
-  }, [pathname])
+  }, [pathname, ...dependencies])
 
   useEffect(() => {
     setFRoutes(filterRoutes(orgRoutes, userPrivileges || ''))
@@ -45,7 +46,7 @@ const useCheckerMaker: Type = ({
       userPrivileges: userPrivileges,
       elementPrivileges,
     })
-  }, [orgUserPrivileges])
+  }, [orgUserPrivileges, ...dependencies])
 
   return routes
 }

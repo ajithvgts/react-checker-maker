@@ -1,6 +1,6 @@
 {
   "name": "react-checker-maker",
-  "version": "0.0.1-alpha.23",
+  "version": "1.0.0",
   "type": "module",
   "keywords": [
     "react",
@@ -26,9 +26,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "react-tooltip": "^5.11.1",
+    "sass": "^1.62.0"
   },
   "devDependencies": {
     "@swc/helpers": "^0.5.0",
@@ -53,7 +56,8 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.2"
+    "react-router-dom": "^6.8.2",
+    "react-tooltip": "^5.11.1"
   },
   "exports": {
     ".": {
@@ -61,6 +65,7 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.es.js"
       }
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   }
 }
